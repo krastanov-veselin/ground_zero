@@ -467,7 +467,8 @@ class MyElements extends UI {
                 active2: false
             })
         }, [
-            this.list("myCoolListElement", this.div(), "myItems", MyElement)
+            this.list("myCoolListElement", this.div(), "myItems", MyElement), // Will share the same sort order in real time due to same state source of truth
+            this.list("myCoolListElement2", this.div(), "myItems", MyElement)
         ]);
     }
 }
