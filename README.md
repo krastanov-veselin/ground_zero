@@ -123,7 +123,9 @@ class MyComponent extends UI {
     
     // Optional, if not declared then defaults to a normal, empty <div></div>
     display() {
-        return this.div({}, [
+        return this.div({
+            text: "Hello World!"
+        }, [
             
         ]);
     }
