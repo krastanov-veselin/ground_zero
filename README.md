@@ -190,7 +190,7 @@ class MyComponent extends UI {
 }
 ```
 
-### Element Mount State
+### Component Mount State
 Inheriting the "A basic Data Tree usage" guide
 ```js
 class MyComponent extends UI {
