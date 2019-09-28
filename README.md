@@ -361,3 +361,47 @@ class MyElement extends UI {
     }
 }
 ```
+
+### State Interactive: Move - (with cursor, equivalent to jQuery's draggable visual behavior but definitelly not logical, haha)
+```js
+Data.create("myApp");
+
+const appData = new ListPointer("myListPointer", "myItems");
+
+appData.add({
+    elementPos: new Pos() // Basically a vec3 {x: 0, y: 0, z: 0}
+}, "main");
+
+class MyElements extends UI {
+    display() {
+        return this.div({}, [
+            this.element(MovingElement, {}, "movingElement1"),
+            this.element(MovingElement, {}, "movingElement2"),
+        ]);
+    }
+}
+
+class MyElement extends UI {
+    mounted() {
+        this.interactive.move.enable(new Pointer("myData", "main", "elementPos"), "MoveHandle");
+        
+        setTimeout(() => {
+            this.interactive.move.disable();
+        }, 10000);
+    }
+    
+    display() {
+        return this.div({
+            style: "background-color: #0001; width: 100px; height: 100%;"
+        }, [
+            this.div({
+                name: "MoveHandle",
+                style: "height: 40px; background-color: #0001"
+            }),
+            this.div({
+                style: "height: calc(100% - 40px)"
+            })
+        ]);
+    }
+}
+```
