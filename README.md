@@ -1,5 +1,7 @@
 ## Welcome to Ground Zero
 
+### The UI lib focused on complex stateful animations and high performance scaling of nodes in a rapid mutable environment.
+
 This is a new project directly started as open source, so it's a work in progress at this time so new content will be added on a daily basis, expect a stable release really soon!
 You can also contact me via veselin.krastanov.zero@gmail.com to discuss contribution.
 
@@ -131,6 +133,10 @@ class MyComponent extends UI {
         const subComponent = this.elements.get("mySubComponent");
         
         console.log(subComponent);
+        
+        setTimeout(() => {
+            subComponent.unmount(); // Get's removed and entirely, garbage collected and on going animations handled
+        }, 5000);
     }
     
     display() {
