@@ -50,6 +50,23 @@ UI has premade data:
     ]
 ```
 
+### A basic Data Tree usage
+```js
+Data.create("myList");
+
+const myList = new ListPointer("myPointerID", "myList");
+
+// Updates all binded lists
+myList.add("main", {
+    appName: "MyCoolApp"
+});
+
+const appName = new Pointer("myList", "main", "appName");
+
+// Updates all UI bindings in a DOM update batch so it generates only 1 repaint
+appName.value = "MyCoolApp2";
+```
+
 ### A basic Component
 ```js
 class MyComponent extends UI {
