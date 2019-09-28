@@ -56,6 +56,10 @@ Data.create("myList");
 
 const myList = new ListPointer("myPointerID", "myList");
 
+myList.onAdd = (id) => {
+    console.log(myList.item(id));
+}
+
 // Updates all binded lists
 // Second param is optional, this is why design wise it's after the object insertion
 myList.add({
@@ -63,6 +67,10 @@ myList.add({
 }, "main");
 
 const appName = new Pointer("myList", "main", "appName");
+
+appName.onUpdate = (newValue, oldValue) => {
+    console.log(newValue);
+}
 
 // Updates all UI bindings in a DOM update batch so it generates only 1 repaint
 appName.value = "MyCoolApp2";
