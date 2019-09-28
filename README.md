@@ -142,7 +142,7 @@ class MyComponent extends UI {
                     this.value("opacity", active === false && active2 === true ? 1 : 0),
                     this.value("background-color", active === true ? "#555" : "#999"),
                 ])),
-                stateClass: this.state(active, update => update([
+                stateClass: this.state([active, active2], update => update([
                     this.value("active", active.value), // adds or removes className "active"
                     this.value("active2", active2.value) // adds or removes className "active2"
                 ]))
