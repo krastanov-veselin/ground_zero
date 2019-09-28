@@ -1,8 +1,8 @@
 /** @todo Has to be reinvented from previous version */
 
 class Padding extends InteractiveLibrary {
-    constructor() {
-        super();
+    constructor(interactive = new InteractiveUI()) {
+        super(interactive);
     }
     
     enable() {

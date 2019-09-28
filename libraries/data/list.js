@@ -14,7 +14,7 @@ class List extends Ground {
     }
     
     add(structure = {}, id = "") {
-        if (id.length === "") {
+        if (id.length === 0) {
             id = performance.now() + "_" + this.random(1, 99999);
         }
         

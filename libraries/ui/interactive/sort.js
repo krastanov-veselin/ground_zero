@@ -57,6 +57,10 @@ class Sort extends InteractiveLibrary {
     }
     
     disable() {
+        if (this.enabled === false) {
+            return;
+        }
+        
         this.listPointer.unmount();
         this.listPointer = null;
         

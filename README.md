@@ -89,12 +89,10 @@ myList.add({
     active2: true
 }, "main");
 
-const appName = new Pointer("myList", "main", "appName");
-
-// This event get triggered regardless of which pointer to the same location issued the mutation
-appName.onUpdate = (newValue, oldValue) => {
-    console.log(newValue);
-}
+const appName = new Pointer("myList", "main", "appName", (newValue, oldValue) => {
+    // This event get triggered regardless of which pointer to the same location issued the mutation
+    console.log(newValue, oldValue);
+});
 
 // Updates all UI bindings in a DOM update batch so it generates only 1 repaint
 appName.value = "MyCoolApp2";
@@ -186,25 +184,36 @@ class MySubComponent extends UI {
 Inheriting the "A basic Data Tree usage" guide
 ```js
 class MyComponent extends UI {
-    display() {
-        const name = new Pointer("myList", "main", "appName");
-        const active = new Pointer("myList", "main", "active");
-        const active2 = new Pointer("myList", "main", "active2");
+    constructor(...p) {
+        super(...p);
         
+        this.name = new Pointer("myList", "main", "appName");
+        this.active = new Pointer("myList", "main", "active");
+        this.active2 = new Pointer("myList", "main", "active2");
+    }
+    
+    mounted() {
+        setTimeout(() => {
+            this.active.value = true;
+            this.active2.value = false;
+        }, 2000);
+    }
+    
+    display() {
         return this.div({}, [
             this.div({
                 text: "Optional Original Text",
-                style: "opacity: 1; background-color: #333", // Some optional original style
+                style: "opacity: 1; background-color: #333; width: 100px; height: 100px;", // Some optional original style
                 className: "active active2", // Some optional original classnames
                 
-                stateText: this.state(name, update => update(name.value)),
-                stateStyle: this.state([active, active2], update => update([
-                    this.value("opacity", active === false && active2 === true ? 1 : 0),
-                    this.value("background-color", active === true ? "#555" : "#999"),
+                stateText: this.state(this.name, update => update(this.name.value)),
+                stateStyle: this.state([this.active, this.active2], update => update([
+                    this.value("opacity", this.active.value === true && this.active2.value === false ? 1 : 0),
+                    this.value("background-color", this.active.value === true ? "#555" : "#999"),
                 ])),
-                stateClass: this.state([active, active2], update => update([
-                    this.value("active", active.value), // adds or removes className "active"
-                    this.value("active2", active2.value) // adds or removes className "active2"
+                stateClass: this.state([this.active, this.active2], update => update([
+                    this.value("active", this.active.value), // adds or removes className "active"
+                    this.value("active2", this.active2.value) // adds or removes className "active2"
                 ]))
             })
         ]);
@@ -240,7 +249,7 @@ class MyComponent extends UI {
             this.stateMount(
                 [this.active, this.active2], 
                 () => this.active.value === true && this.active2.value === false, 
-                MySubComponent, {}, "mySubComponent"
+                MySubComponent, () => {}, "mySubComponent"
             )
         ]);
     }
@@ -277,6 +286,15 @@ class MyComponent extends UI {
         setTimeout(() => {
             this.active2.value = true;
             // Element mounted at position "activePosition"
+            setTimeout(() => {
+                this.active.value = false;
+                // Element unmounted
+                setTimeout(() => {
+                    this.active.value = true;
+                    this.active2.value = false;
+                    // Element mounted on another position
+                }, 2000);
+            }, 2000);
         }, 2000);
     }
     
@@ -290,7 +308,7 @@ class MyComponent extends UI {
             this.stateMount(
                 [this.active], 
                 () => this.active.value === true, 
-                MySubComponent, {}, "mySubComponent"
+                MySubComponent, () => {}, "mySubComponent"
             ),
             this.div({
                 text: "Another separator"
@@ -316,7 +334,7 @@ Data.create("myItems");
 
 const myItems = new ListPointer("myListPointer", "myItems");
 
-for (let i = 0; i < 20, i++) {
+for (let i = 0; i < 5; i++) {
     myItems.add({
         name: "item " + i,
         active: true,
@@ -329,13 +347,14 @@ class MyElements extends UI {
         return this.div({}, [
             this.div({
                 text: "Add Item",
-                onClick: myItems.add({
+                onClick: () => myItems.add({
                     name: "item " + performance.now(),
                     active: true,
                     active2: false
                 })
             }),
-            this.list("myCoolListElement", this.div(), "myItems", MyElement)
+            this.list("myCoolListElement", this.div(), "myItems", MyElement),
+            this.list("myCoolListElement2", this.div(), "myItems", MyElement),
         ]);
     }
 }
@@ -343,6 +362,7 @@ class MyElements extends UI {
 class MyElement extends UI {
     display() {
         const name = new Pointer("myItems", this.options.id, "name");
+        const active = new Pointer("myItems", this.options.id, "active");
         
         return this.div({
             style: "transition: opacity 1s;",
@@ -351,7 +371,7 @@ class MyElement extends UI {
             ]))
         }, [
             this.input({
-                stateValue: this.state(name, update => update(name)),
+                stateValue: this.state(name, update => update(name.value)),
                 onKeyDown: ev => setTimeout(() => name.value = ev.target.value, 0)
             }),
             this.div({
@@ -367,7 +387,7 @@ class MyElement extends UI {
 ```js
 Data.create("myApp");
 
-const appData = new ListPointer("myListPointer", "myItems");
+const appData = new ListPointer("myListPointer", "myApp");
 
 appData.add({
     elementPos: new Pos() // Basically a vec3 {x: 0, y: 0, z: 0}
@@ -382,18 +402,19 @@ class MyElements extends UI {
     }
 }
 
-class MyElement extends UI {
+class MovingElement extends UI {
     mounted() {
-        this.interactive.move.enable(new Pointer("myData", "main", "elementPos"), "MoveHandle");
+        this.interactive.move.enable(new Pointer("myApp", "main", "elementPos"), "MoveHandle");
         
-        setTimeout(() => {
-            this.interactive.move.disable();
-        }, 10000);
+        // Optional use in case of removing move
+        // setTimeout(() => {
+        //     this.interactive.move.disable();
+        // }, 10000);
     }
     
     display() {
         return this.div({
-            style: "background-color: #0001; width: 100px; height: 100%;"
+            style: "background-color: #0001; width: 100px; height: 100%; margin: 5px;"
         }, [
             this.div({
                 name: "MoveHandle",
@@ -411,11 +432,14 @@ class MyElement extends UI {
 ```js
 Data.create("myApp");
 
-const appData = new ListPointer("myListPointer", "myItems");
+const appData = new ListPointer("myListPointer", "myApp");
 
 appData.add({
     elementPos: new Size(), // Basically a vec3 {x: 0, y: 0, z: 0}
-    elementSize: new Size() // Basically a vec3 {x: 0, y: 0, z: 0}
+    elementSize: new Size({
+        x: 50,
+        y: 50
+    }) // Basically a vec3 {x: 0, y: 0, z: 0}
 }, "main");
 
 class MyElements extends UI {
@@ -427,18 +451,19 @@ class MyElements extends UI {
     }
 }
 
-class MyElement extends UI {
+class MovingElement extends UI {
     mounted() {
-        this.interactive.resize.enable(new Pointer("myData", "main", "elementSize"), new Pointer("myData", "main", "elementPos"));
+        this.interactive.resize.enable(new Pointer("myApp", "main", "elementSize"), new Pointer("myApp", "main", "elementPos"));
         
-        setTimeout(() => {
-            this.interactive.resize.disable();
-        }, 10000);
+        // Optional use in case of removing resize
+        // setTimeout(() => {
+        //     this.interactive.resize.disable();
+        // }, 10000);
     }
     
     display() {
         return this.div({
-            style: "background-color: #0001; width: 100px; height: 100%;"
+            style: "background-color: #0001; width: 100px; height: 100%; margin: 5px;"
         }, [
             
         ]);
@@ -452,7 +477,7 @@ Data.create("myItems");
 
 const myItems = new ListPointer("myListPointer", "myItems");
 
-for (let i = 0; i < 20, i++) {
+for (let i = 0; i < 20; i++) {
     myItems.add({
         name: "item " + i,
         active: true,
@@ -490,7 +515,7 @@ class MyElement extends UI {
         const name = new Pointer("myItems", this.options.id, "name");
         
         return this.div({
-            stateText: this.state(name, update => update(name)),
+            stateText: this.state(name, update => update(name.value)),
         }, [
             
         ]);
@@ -512,7 +537,7 @@ Data.create("myItems");
 
 const myItems = new ListPointer("myListPointer", "myItems");
 
-for (let i = 0; i < 20, i++) {
+for (let i = 0; i < 20; i++) {
     myItems.add(new ItemStructure({
         name: "item " + i,
         active: true,
@@ -523,7 +548,7 @@ for (let i = 0; i < 20, i++) {
 class MyElements extends UI {
     mounted() {
         this.interactive.drop.enable("DropArea", [ItemStructure], (item) => {
-            console.log("dropped", console.log(item));
+            console.log("dropped", item);
         });
     }
     
@@ -543,16 +568,17 @@ class MyElement extends UI {
     mounted() {
         this.interactive.drag.enable("main", "#0001");
         
-        setTimeout(() => {
-            this.interactive.drag.disable();
-        }, 10000);
+        // Optional use in case of removing drag
+        // setTimeout(() => {
+        //     this.interactive.drag.disable();
+        // }, 10000);
     }
     
     display() {
         const name = new Pointer("myItems", this.options.id, "name");
         
         return this.div({
-            stateText: this.state(name, update => update(name)),
+            stateText: this.state(name, update => update(name.value)),
         }, [
             
         ]);

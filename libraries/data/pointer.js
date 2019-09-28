@@ -70,7 +70,6 @@ class Pointer extends Ground {
     unmount() {
         if (Data.lists.has(this.listID) === false) {
             this.mounted = false;
-            this.item = null;
             
             return;
         }
@@ -79,7 +78,6 @@ class Pointer extends Ground {
         
         if (list.items.has(this.itemID) === false) {
             this.mounted = false;
-            this.item = null;
             
             return;
         }
@@ -87,7 +85,6 @@ class Pointer extends Ground {
         if (this.onUpdate !== null) {
             if (this.item.pointers.has(this.prop) === false) {
                 this.mounted = false;
-                this.item = null;
                 
                 return;
             }
