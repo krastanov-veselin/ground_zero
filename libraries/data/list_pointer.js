@@ -12,7 +12,7 @@ class ListPointer extends Ground {
     ) {
         super();
         
-        this.eventID = eventID;
+        this.eventID = eventID.length ? eventID : "listEvent_" + performance.now() + "_" + this.random(1, 99999);
         this.listID = listID;
         this.onAdd = onAdd;
         this.onRemove = onRemove;

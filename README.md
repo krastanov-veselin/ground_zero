@@ -344,7 +344,6 @@ class MyElement extends UI {
         
         return this.div({
             style: "transition: opacity 1s;",
-            stateText: this.state(name, update => update(name)),
             stateStyle: this.state(active, update => update([
                 this.value("opacity", active.value ? 1 : 0)
             ]))
@@ -438,6 +437,55 @@ class MyElement extends UI {
     display() {
         return this.div({
             style: "background-color: #0001; width: 100px; height: 100%;"
+        }, [
+            
+        ]);
+    }
+}
+```
+
+### State Interactive: Sort - (with cursor, equivalent to jQuery's sort visual behavior but yet again definitelly different in logical behavior)
+```js
+Data.create("myItems");
+
+const myItems = new ListPointer("myListPointer", "myItems");
+
+for (let i = 0; i < 20, i++) {
+    myItems.add({
+        name: "item " + i,
+        active: true,
+        active2: false
+    });
+}
+
+class MyElements extends UI {
+    display() {
+        return this.div({
+            onClick: myItems.add({
+                name: "item " + performance.now(),
+                active: true,
+                active2: false
+            })
+        }, [
+            this.list("myCoolListElement", this.div(), "myItems", MyElement)
+        ]);
+    }
+}
+
+class MyElement extends UI {
+    mounted() {
+        this.interactive.sort.enable(new ListPointer("", "myItems"), "main");
+        
+        setTimeout(() => {
+            this.interactive.sort.disable();
+        }, 10000);
+    }
+    
+    display() {
+        const name = new Pointer("myItems", this.options.id, "name");
+        
+        return this.div({
+            stateText: this.state(name, update => update(name)),
         }, [
             
         ]);
