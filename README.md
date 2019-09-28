@@ -57,9 +57,9 @@ Data.create("myList");
 const myList = new ListPointer("myPointerID", "myList");
 
 // Updates all binded lists
-myList.add("main", {
+myList.add({
     appName: "MyCoolApp"
-});
+}, "main");
 
 const appName = new Pointer("myList", "main", "appName");
 
