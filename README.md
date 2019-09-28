@@ -383,7 +383,7 @@ class MyElement extends UI {
 }
 ```
 
-### State Interactive: Move - (with cursor, equivalent to jQuery's draggable visual behavior but definitelly different in logical behavior, haha)
+### State Interactive: Move
 ```js
 Data.create("myApp");
 
@@ -428,7 +428,7 @@ class MovingElement extends UI {
 }
 ```
 
-### State Interactive: Resize - (with cursor, equivalent to jQuery's resizable visual behavior but yet again definitelly different in logical behavior)
+### State Interactive: Resize
 ```js
 Data.create("myApp");
 
@@ -471,7 +471,7 @@ class MovingElement extends UI {
 }
 ```
 
-### State Interactive: Sort - (with cursor, equivalent to jQuery's sort visual behavior but yet again definitelly different in logical behavior)
+### State Interactive: Sort
 ```js
 Data.create("myItems");
 
@@ -523,7 +523,7 @@ class MyElement extends UI {
 }
 ```
 
-### State Interactive: Drag + Drop - (with cursor, equivalent to jQuery's droppable visual behavior but yet again definitelly different in logical behavior)
+### State Interactive: Drag + Drop
 ```js
 class ItemStructure {
     constructor(/** @type {ItemStructure} */ data = {}) {
