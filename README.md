@@ -326,13 +326,15 @@ for (let i = 0; i < 20, i++) {
 
 class MyElements extends UI {
     display() {
-        return this.div({
-            onClick: myItems.add({
-                name: "item " + performance.now(),
-                active: true,
-                active2: false
-            })
-        }, [
+        return this.div({}, [
+            this.div({
+                text: "Add Item",
+                onClick: myItems.add({
+                    name: "item " + performance.now(),
+                    active: true,
+                    active2: false
+                })
+            }),
             this.list("myCoolListElement", this.div(), "myItems", MyElement)
         ]);
     }
@@ -460,13 +462,15 @@ for (let i = 0; i < 20, i++) {
 
 class MyElements extends UI {
     display() {
-        return this.div({
-            onClick: myItems.add({
-                name: "item " + performance.now(),
-                active: true,
-                active2: false
-            })
-        }, [
+        return this.div({}, [
+            this.div({
+                text: "Add Item",
+                onClick: myItems.add({
+                    name: "item " + performance.now(),
+                    active: true,
+                    active2: false
+                })
+            }),
             this.list("myCoolListElement", this.div(), "myItems", MyElement), // Will share the same sort order in real time due to same state source of truth
             this.list("myCoolListElement2", this.div(), "myItems", MyElement)
         ]);
@@ -479,6 +483,67 @@ class MyElement extends UI {
         
         setTimeout(() => {
             this.interactive.sort.disable();
+        }, 10000);
+    }
+    
+    display() {
+        const name = new Pointer("myItems", this.options.id, "name");
+        
+        return this.div({
+            stateText: this.state(name, update => update(name)),
+        }, [
+            
+        ]);
+    }
+}
+```
+
+### State Interactive: Drag + Drop - (with cursor, equivalent to jQuery's droppable visual behavior but yet again definitelly different in logical behavior)
+```js
+class ItemStructure {
+    constructor(/** @type {ItemStructure} */ data = {}) {
+        this.name = typeof data.name === "undefined" ? "" : data.name;
+        this.active = typeof data.active === "undefined" ? false : data.active;
+        this.active2 = typeof data.active2 === "undefined" ? false : data.active2;
+    }
+}
+
+Data.create("myItems");
+
+const myItems = new ListPointer("myListPointer", "myItems");
+
+for (let i = 0; i < 20, i++) {
+    myItems.add(new ItemStructure({
+        name: "item " + i,
+        active: true,
+        active2: false
+    }));
+}
+
+class MyElements extends UI {
+    mounted() {
+        this.interactive.drop.enable("DropArea", [ItemStructure], (item) => {
+            console.log("dropped", console.log(item));
+        });
+    }
+    
+    display() {
+        return this.div({}, [
+            this.div({
+                text: "Drop Area",
+                name: "DropArea"
+            }),
+            this.list("myCoolListElement", this.div(), "myItems", MyElement)
+        ]);
+    }
+}
+
+class MyElement extends UI {
+    mounted() {
+        this.interactive.drag.enable("main", "#0001");
+        
+        setTimeout(() => {
+            this.interactive.drag.disable();
         }, 10000);
     }
     
