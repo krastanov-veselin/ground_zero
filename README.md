@@ -1,4 +1,6 @@
 ## Welcome to Ground Zero
+![alt text](./github_images/name_cover.jpg)
+Name is inspired by Grimoire of Zero - no copyright owning hehe
 
 ### The UI lib focused on complex stateful animations and high performance scaling of nodes in a rapid mutable environment.
 
