@@ -309,3 +309,52 @@ class MySubComponent extends UI {
     }
 }
 ```
+
+### State List
+```js
+Data.create("myItems");
+
+const myItems = new ListPointer("myListPointer", "myItems");
+
+for (let i = 0; i < 20, i++) {
+    myItems.add({
+        name: "item " + i,
+        active: true,
+        active2: false
+    });
+}
+
+class MyElements extends UI {
+    display() {
+        return this.div({
+            onClick: myItems.add({
+                name: "item " + performance.now(),
+                active: true,
+                active2: false
+            })
+        }, [
+            this.list("myCoolListElement", this.div(), "myItems", MyElement)
+        ]);
+    }
+}
+
+class MyElement extends UI {
+    display() {
+        const name = new Pointer("myItems", this.options.id, "name");
+        
+        return this.div({
+            style: "transition: opacity 1s;",
+            stateText: this.state(name, update => update(name)),
+            stateStyle: this.state(active, update => update([
+                this.value("opacity", active.value ? 1 : 0)
+            ])),
+            onClick: () => myItems.remove(this.options.id)
+        }, [
+            this.input({
+                stateValue: this.state(name, update => update(name)),
+                onKeyDown: ev => setTimeout(() => name.value = ev.target.value, 0)
+            })
+        ]);
+    }
+}
+```
