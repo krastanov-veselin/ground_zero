@@ -22,7 +22,7 @@ class Resize extends InteractiveLibrary {
         node.transform.sizeXY(sizePointer.value.x, sizePointer.value.y);
     }
     
-    enable(sizePointer = new Pointer(), posPointer = new Pointer(), nodeName = "") {
+    enable(sizePointer = new Pointer(), posPointer = new Pointer()) {
         const sizeFunc = this._pointerUpdate.bind(
             this, 
             sizePointer, 
@@ -38,7 +38,7 @@ class Resize extends InteractiveLibrary {
         )
         
         this.interactive.ui.propPointers.set(
-            nodeName + "_resize_size", 
+            "resize_size", 
             new Pointer(
                 sizePointer.listID, 
                 sizePointer.itemID, 
@@ -48,7 +48,7 @@ class Resize extends InteractiveLibrary {
         );
         
         this.interactive.ui.propPointers.set(
-            nodeName + "_resize_pos", 
+            "resize_pos", 
             new Pointer(
                 posPointer.listID, 
                 posPointer.itemID, 

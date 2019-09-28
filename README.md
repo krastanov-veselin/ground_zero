@@ -405,3 +405,42 @@ class MyElement extends UI {
     }
 }
 ```
+
+### State Interactive: Resize - (with cursor, equivalent to jQuery's resizable visual behavior but yet again definitelly different in logical behavior)
+```js
+Data.create("myApp");
+
+const appData = new ListPointer("myListPointer", "myItems");
+
+appData.add({
+    elementPos: new Size(), // Basically a vec3 {x: 0, y: 0, z: 0}
+    elementSize: new Size() // Basically a vec3 {x: 0, y: 0, z: 0}
+}, "main");
+
+class MyElements extends UI {
+    display() {
+        return this.div({}, [
+            this.element(MovingElement, {}, "movingElement1"), // Both elements share the same source of truth and will have same state in 60fps while resizing
+            this.element(MovingElement, {}, "movingElement2")
+        ]);
+    }
+}
+
+class MyElement extends UI {
+    mounted() {
+        this.interactive.resize.enable(new Pointer("myData", "main", "elementSize"), new Pointer("myData", "main", "elementPos"));
+        
+        setTimeout(() => {
+            this.interactive.resize.disable();
+        }, 10000);
+    }
+    
+    display() {
+        return this.div({
+            style: "background-color: #0001; width: 100px; height: 100%;"
+        }, [
+            
+        ]);
+    }
+}
+```
