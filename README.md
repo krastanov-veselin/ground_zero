@@ -57,6 +57,7 @@ Data.create("myList");
 const myList = new ListPointer("myPointerID", "myList");
 
 // Updates all binded lists
+// Second param is optional, this is why design wise it's after the object insertion
 myList.add({
     appName: "MyCoolApp"
 }, "main");
