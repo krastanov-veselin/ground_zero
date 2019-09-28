@@ -188,5 +188,3 @@ class MyComponent extends UI {
     }
 }
 ```
-
-I don't own any copyrights to the image below project's title, it belongs to Grimoire of Zero's owners hehe
