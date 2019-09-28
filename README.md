@@ -2,6 +2,7 @@
 ![alt text](./github_images/name_cover.jpg)
 
 Project name is inspired by Grimoire of Zero, so say Hi to Zero as well!
+- No copyrights owned for the image above!
 
 ### The UI lib focused on complex stateful animations and high performance scaling of nodes in a rapid mutable environment.
 
