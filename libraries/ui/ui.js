@@ -741,7 +741,7 @@ class UI extends ShortcutsUI {
         /** @type {Pointer[]} */ pointers = [], 
         onUpdate = () => {}, 
         elementReference = UI, 
-        data = {}, 
+        data = () => {}, 
         name = ""
     ) {
         return new NodeComment(
