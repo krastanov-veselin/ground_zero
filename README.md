@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+## Welcome to Ground Zero
 
-You can use the [editor on GitHub](https://github.com/krastanov-veselin/ground_zero/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This is a new project directly started as open source, so it's a work in progress at this time so new content will be added on a daily basis, expect a stable release really soon!
+You can also contact me via veselin.krastanov.zero@gmail.com to discuss contribution.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## What is done so far that is stable and ready to use? Basic Usage:
 
-### Markdown
+### Non-diffing virtual dom concept based on a subscribe-update databinding methodology.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+### A basic <Component />-ish Component :D
+```js
+class MyComponent extends UI {
+    // Optional
+    beforeMount() {
+        // This get's called before display()
+    }
+    
+    // Optional
+    mounted() {
+        // Get's called after display() when component is mounted in both the 
+        // UI memory and the DOM memory.
+        // And all it's options are setup.
+    }
+    
+    onUnmount(unmount) {
+        // Unmounts when this function is called, supporting async unmounting
+        // Especially when it comes to animations
+        unmount();
+    }
+    
+    // Optional, if not declared then defaults to a normal, empty <div></div>
+    display() {
+        return this.div({}, [
+            
+        ]);
+    }
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/krastanov-veselin/ground_zero/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.

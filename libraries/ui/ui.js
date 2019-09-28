@@ -143,6 +143,8 @@ class UI extends ShortcutsUI {
     }
     
     mount() {
+        this.beforeMount();
+        
         const node = this.display();
         
         this.nodes.delete(node.options.name);
