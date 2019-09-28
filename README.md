@@ -50,7 +50,7 @@ UI has premade data:
     ]
 ```
 
-### A basic <Component />-ish Component :D
+### A basic Component
 ```js
 class MyComponent extends UI {
     // Optional
