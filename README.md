@@ -262,13 +262,13 @@ class MyComponent extends UI {
     
     display() {
         return this.div({}, [
-            this.statePosition([this.active], "mySubComponent", () => !this.active.value, "inactivePosition"),
+            this.statePosition([this.active2], "mySubComponent", () => !this.active2.value, "inactivePosition"),
             this.div({
                 text: "Separator"
             }),
-            this.statePosition([this.active], "mySubComponent", () => this.active.value, "activePosition"),
+            this.statePosition([this.active2], "mySubComponent", () => this.active2.value, "activePosition"),
             this.stateMount(
-                [this.active, this.active2], 
+                [this.active], 
                 () => this.active.value === true, 
                 MySubComponent, {}, "mySubComponent"
             ),
