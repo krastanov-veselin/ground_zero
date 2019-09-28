@@ -12,6 +12,7 @@ You can also contact me via veselin.krastanov.zero@gmail.com to discuss contribu
 ## What is done so far that is stable and ready to use? Basic Usage:
 
 ### Non-diffing virtual dom concept based on a subscribe-update databinding methodology.
+### Constant memory leak unit testing. All combinations of all features async and sync produce Zero memory leaks. Before every minor update memory leak unit testing is initialised, so it's safe to play with it, hoho.
 ```
 UI Data layout
 
