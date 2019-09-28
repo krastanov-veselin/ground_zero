@@ -151,7 +151,9 @@ class MyComponent extends UI {
 
 class MySubComponent extends UI {
     display() {
-        return this.div({}, [
+        return this.div({
+            text: "Hello World!"
+        }, [
             
         ]);
     }
@@ -192,27 +194,41 @@ class MyComponent extends UI {
 Inheriting the "A basic Data Tree usage" guide
 ```js
 class MyComponent extends UI {
-    mounted() {
-        /** @type {MySubComponent} */
-        const subComponent = this.elements.get("mySubComponent");
+    constructor(...p) {
+        super(...p);
         
-        console.log(subComponent);
+        this.active = new Pointer("myList", "main", "active");
+        this.active2 = new Pointer("myList", "main", "active2");
+    }
+    
+    mounted() {
+        this.active.value = true;
+        this.active2.value = false;
+        // Element mounted at this point
         
         setTimeout(() => {
-            subComponent.unmount(); // Get's removed and entirely, garbage collected and on going animations handled
+            this.active.value = false;
+            this.active2.value = true;
+            // Element unmounted at this point
         }, 5000);
     }
     
     display() {
         return this.div({}, [
-            this.element(MySubComponent, {}, "mySubComponent")
+            this.stateMount(
+                [this.active, this.active2], 
+                () => this.active.value === true && this.active2.value === false, 
+                MySubComponent, {}, "mySubComponent"
+            )
         ]);
     }
 }
 
 class MySubComponent extends UI {
     display() {
-        return this.div({}, [
+        return this.div({
+            text: "Hello World!"
+        }, [
             
         ]);
     }
