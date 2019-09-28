@@ -236,3 +236,56 @@ class MySubComponent extends UI {
     }
 }
 ```
+
+### Component Mount Position State
+Inheriting the "A basic Data Tree usage" guide
+```js
+class MyComponent extends UI {
+    constructor(...p) {
+        super(...p);
+        
+        this.active = new Pointer("myList", "main", "active");
+        this.active2 = new Pointer("myList", "main", "active2");
+    }
+    
+    mounted() {
+        this.active.value = true;
+        
+        this.active2.value = false;
+        // Element mounted at position "inactivePosition"
+        
+        setTimeout(() => {
+            this.active2.value = true;
+            // Element mounted at position "activePosition"
+        }, 2000);
+    }
+    
+    display() {
+        return this.div({}, [
+            this.statePosition([this.active], "mySubComponent", () => !this.active.value, "inactivePosition"),
+            this.div({
+                text: "Separator"
+            }),
+            this.statePosition([this.active], "mySubComponent", () => this.active.value, "activePosition"),
+            this.stateMount(
+                [this.active, this.active2], 
+                () => this.active.value === true, 
+                MySubComponent, {}, "mySubComponent"
+            ),
+            this.div({
+                text: "Another separator"
+            })
+        ]);
+    }
+}
+
+class MySubComponent extends UI {
+    display() {
+        return this.div({
+            text: "Hello World!"
+        }, [
+            
+        ]);
+    }
+}
+```
