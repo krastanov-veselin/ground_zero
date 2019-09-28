@@ -99,7 +99,7 @@ appName.onUpdate = (newValue, oldValue) => {
 appName.value = "MyCoolApp2";
 ```
 
-### A basic Component
+### A basic Component + Initialisation
 ```js
 class MyComponent extends UI {
     // Optional
@@ -128,6 +128,23 @@ class MyComponent extends UI {
         ]);
     }
 }
+
+class MyCoolApplicationArchitecture {
+    constructor() {
+        /** @type {MyComponent} */
+        this.view = null;
+    }
+    
+    run() {
+        this.view = new MyComponent();
+        this.view.initialise(".app");
+        // Magic happens!
+    }
+}
+
+const app = new MyCoolApplicationArchitecture();
+
+app.run();
 ```
 
 ### Component Nesting
