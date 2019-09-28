@@ -6,6 +6,49 @@ You can also contact me via veselin.krastanov.zero@gmail.com to discuss contribu
 ## What is done so far that is stable and ready to use? Basic Usage:
 
 ### Non-diffing virtual dom concept based on a subscribe-update databinding methodology.
+```
+UI Data layout
+
+list[
+    key: item[
+        prop: value
+    ]
+]
+
+Usage concept
+
+Pointer - points to a listID->itemID->prop
+    Handles[
+        mutation[
+            setValue
+            getValue
+        ]
+        events[
+            onUpdate
+        ]
+    ]
+
+ListPointer - points to listID
+    Handles[
+        mutation[
+            addItem
+            removeItem
+            sort
+        ]
+        events[
+            onAddItem
+            onRemoveItem
+            onSort
+        ]
+    ]
+
+UI has premade data:
+    "ui": [
+        "main": {
+            ...
+        }
+    ]
+```
 
 ### A basic <Component />-ish Component :D
 ```js
