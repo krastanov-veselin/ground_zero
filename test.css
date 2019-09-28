@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+    transform: translate3d(0, 0, 0);
+    overflow: hidden;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+}
+
+.AppUI {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+div {
+    /* transform: translate3d(0, 0, 0); */
+}
+
+.AppUI {
+    width: 100%;
+    height: 100%;
+}
+
+.MoveElement {
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 5px;
+    /* position: absolute; */
+    /* box-shadow: 0 0 40px -5px #0005; */
+}
+
+.MoveElement2 {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #0001;
+    /* box-shadow: 0 0 40px -5px #0005; */
+}
+
+.WindowTop {
+    height: 40px;
+    background-color: #0003;
+}
+
+.WindowContent {
+    height: calc(100% - 40px);
+    background-color: #0001;
+}
+
+.FloatFix::before, .FloatFix::after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+.FloatLeft {
+    float: left;
+}
+
+.FloatRight {
+    float: left;
+}
+
+.Resizer {
+    position: absolute;
+}
+
+.ResizerLeft {
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    cursor: ew-resize;
+}
+
+.ResizerTop {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 10px;
+    cursor: ns-resize;
+}
+
+.ResizerRight {
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    cursor: ew-resize;
+}
+
+.ResizerBottom {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    cursor: ns-resize;
+}
+
+.ResizerTopLeft {
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    cursor: nwse-resize;
+}
+
+.ResizerTopRight {
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    cursor: nesw-resize;
+}
+
+.ResizerBottomLeft {
+    left: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    cursor: nesw-resize;
+}
+
+.ResizerBottomRight {
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    cursor: nwse-resize;
+}
+
+.DropTest {
+    width: 500px;
+    background-color: #0001;
+}
+
+.NotDropArea {
+    padding: 100px;
+    background-color: #0002;
+}
+
+.DropArea {
+    padding: 50px;
+    background-color: #0001;
+}
+
+.MyList2Item {
+    padding: 10px;
+    background-color: #fff1;
+    margin: 5px;
+    box-shadow: 0 0 20px -5px #0005;
+    user-select: none;
+}
