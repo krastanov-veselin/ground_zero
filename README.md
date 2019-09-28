@@ -76,7 +76,9 @@ myList.onSort = (targetID, movingID, position) => {
 // Updates all binded lists
 // Second param is optional, this is why design wise it's after the object insertion
 myList.add({
-    appName: "MyCoolApp"
+    appName: "MyCoolApp",
+    active: false,
+    active2: true
 }, "main");
 
 const appName = new Pointer("myList", "main", "appName");
@@ -120,3 +122,32 @@ class MyComponent extends UI {
 }
 ```
 
+### Node State
+Inheriting the "A basic Data Tree usage" guide
+```js
+class MyComponent extends UI {
+    display() {
+        const name = new Pointer("myList", "main", "appName");
+        const active = new Pointer("myList", "main", "active");
+        const active2 = new Pointer("myList", "main", "active2");
+        
+        return this.div({}, [
+            this.div({
+                text: "Optional Original Text",
+                style: "opacity: 1; background-color: #333", // Some optional original style
+                className: "active active2", // Some optional original classnames
+                
+                stateText: this.state(name, update => update(name.value)),
+                stateStyle: this.state([active, active2], update => update([
+                    this.value("opacity", active === false && active2 === true ? 1 : 0),
+                    this.value("background-color", active === true ? "#555" : "#999"),
+                ])),
+                stateClass: this.state(active, update => update([
+                    this.value("active", active.value), // adds or removes className "active"
+                    this.value("active2", active2.value) // adds or removes className "active2"
+                ]))
+            })
+        ]);
+    }
+}
+```
