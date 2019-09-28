@@ -559,3 +559,5 @@ class MyElement extends UI {
     }
 }
 ```
+
+## Next steps in Interactive are [rotate, scale, skew, padding, margin, fontColor, border, borderRadius, backgroundColor]
