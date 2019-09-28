@@ -113,6 +113,7 @@ class MyComponent extends UI {
         // And all it's options are setup.
     }
     
+    // Optional
     onUnmount(unmount) {
         // Unmounts when this function is called, supporting async unmounting
         // Especially when it comes to animations
