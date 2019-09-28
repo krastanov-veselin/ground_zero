@@ -56,7 +56,7 @@ Data.create("myList");
 
 const myList = new ListPointer("myPointerID", "myList");
 
-// These events get triggered regardless of which listPointer issued the mutation
+// These events get triggered regardless of which listPointer to the same location issued the mutation
 myList.onAdd = (id) => {
     console.log(myList.item(id));
 }
@@ -81,6 +81,7 @@ myList.add({
 
 const appName = new Pointer("myList", "main", "appName");
 
+// This event get triggered regardless of which pointer to the same location issued the mutation
 appName.onUpdate = (newValue, oldValue) => {
     console.log(newValue);
 }
