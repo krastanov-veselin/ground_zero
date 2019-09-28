@@ -122,6 +122,33 @@ class MyComponent extends UI {
 }
 ```
 
+### Component Nesting
+Inheriting the "A basic Data Tree usage" guide
+```js
+class MyComponent extends UI {
+    mounted() {
+        /** @type {MySubComponent} */
+        const subComponent = this.elements.get("mySubComponent");
+        
+        console.log(subComponent);
+    }
+    
+    display() {
+        return this.div({}, [
+            this.element(MySubComponent, {}, "mySubComponent")
+        ]);
+    }
+}
+
+class MySubComponent extends UI {
+    display() {
+        return this.div({}, [
+            
+        ]);
+    }
+}
+```
+
 ### Node State
 Inheriting the "A basic Data Tree usage" guide
 ```js
