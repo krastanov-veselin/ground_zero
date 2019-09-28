@@ -6,6 +6,10 @@ Project name is inspired by Grimoire of Zero, so say Hi to Zero as well!
 
 ### The UI lib focused on complex stateful animations and high performance scaling of nodes in a rapid mutable environment that runs like magic! :O
 
+```
+npm install ground_zero
+```
+
 This is a new project directly started as open source, so it's a continuous work in progress and new content may be added on a daily basis until reaching a stable release, so do expect a stable release really soon! ... And if you don't ... I'LL BE MAD BRO/SIS! And Zero will be Mad too!!
 
 You can also contact me via veselin.krastanov.zero@gmail.com to discuss contribution.

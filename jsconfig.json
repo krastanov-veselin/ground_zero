@@ -3,13 +3,4 @@
         "target": "es2017",
         "module": "commonjs"
     },
-    "typeAcquisition": {
-        "include": [
-            "three"
-        ]
-    },
-    "exclude": [
-        "system_bundle.js",
-        "app_bundle.js",
-    ]
 }

@@ -1,0 +1,19 @@
+{
+  "name": "ground_zero_ui",
+  "version": "1.0.0",
+  "description": "![alt text](./github_images/name_cover.jpg)",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krastanov-veselin/ground_zero.git"
+  },
+  "author": "Krastanov Veselin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krastanov-veselin/ground_zero/issues"
+  },
+  "homepage": "https://github.com/krastanov-veselin/ground_zero#readme"
+}
