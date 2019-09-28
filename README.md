@@ -347,12 +347,15 @@ class MyElement extends UI {
             stateText: this.state(name, update => update(name)),
             stateStyle: this.state(active, update => update([
                 this.value("opacity", active.value ? 1 : 0)
-            ])),
-            onClick: () => myItems.remove(this.options.id)
+            ]))
         }, [
             this.input({
                 stateValue: this.state(name, update => update(name)),
                 onKeyDown: ev => setTimeout(() => name.value = ev.target.value, 0)
+            }),
+            this.div({
+                text: "Remove",
+                onClick: () => myItems.remove(this.options.id)
             })
         ]);
     }
