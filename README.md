@@ -362,7 +362,7 @@ class MyElement extends UI {
 }
 ```
 
-### State Interactive: Move - (with cursor, equivalent to jQuery's draggable visual behavior but definitelly not logical, haha)
+### State Interactive: Move - (with cursor, equivalent to jQuery's draggable visual behavior but definitelly different in logical behavior, haha)
 ```js
 Data.create("myApp");
 
@@ -375,8 +375,8 @@ appData.add({
 class MyElements extends UI {
     display() {
         return this.div({}, [
-            this.element(MovingElement, {}, "movingElement1"),
-            this.element(MovingElement, {}, "movingElement2"),
+            this.element(MovingElement, {}, "movingElement1"), // Both elements share the same source of truth and will have same state in 60fps while dragging
+            this.element(MovingElement, {}, "movingElement2")
         ]);
     }
 }
