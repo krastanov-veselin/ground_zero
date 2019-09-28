@@ -4,7 +4,7 @@
 Project name is inspired by Grimoire of Zero, so say Hi to Zero as well!
 - No copyrights owned for the image above!
 
-### The UI lib focused on complex stateful animations and high performance scaling of nodes in a rapid mutable environment.
+### The UI lib focused on complex stateful animations and high performance scaling of nodes in a rapid mutable environment that runs like magic! :O
 
 This is a new project directly started as open source, so it's a work in progress at this time so new content will be added on a daily basis, expect a stable release really soon!
 You can also contact me via veselin.krastanov.zero@gmail.com to discuss contribution.
@@ -129,7 +129,6 @@ class MyComponent extends UI {
 ```
 
 ### Component Nesting
-Inheriting the "A basic Data Tree usage" guide
 ```js
 class MyComponent extends UI {
     mounted() {
@@ -184,6 +183,37 @@ class MyComponent extends UI {
                     this.value("active2", active2.value) // adds or removes className "active2"
                 ]))
             })
+        ]);
+    }
+}
+```
+
+### Element Mount State
+Inheriting the "A basic Data Tree usage" guide
+```js
+class MyComponent extends UI {
+    mounted() {
+        /** @type {MySubComponent} */
+        const subComponent = this.elements.get("mySubComponent");
+        
+        console.log(subComponent);
+        
+        setTimeout(() => {
+            subComponent.unmount(); // Get's removed and entirely, garbage collected and on going animations handled
+        }, 5000);
+    }
+    
+    display() {
+        return this.div({}, [
+            this.element(MySubComponent, {}, "mySubComponent")
+        ]);
+    }
+}
+
+class MySubComponent extends UI {
+    display() {
+        return this.div({}, [
+            
         ]);
     }
 }
