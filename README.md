@@ -531,7 +531,8 @@ class MyElements extends UI {
         return this.div({}, [
             this.div({
                 text: "Drop Area",
-                name: "DropArea"
+                name: "DropArea",
+                style: "height: 200px; background-color: #0001;"
             }),
             this.list("myCoolListElement", this.div(), "myItems", MyElement)
         ]);
