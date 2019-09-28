@@ -60,6 +60,18 @@ myList.onAdd = (id) => {
     console.log(myList.item(id));
 }
 
+myList.onRemove = (id) => {
+    console.log("Removed item", id);
+}
+
+myList.onSort = (targetID, movingID, position) => {
+    if (position === 0) {
+        console.log(movingID, targetID);
+    } else {
+        console.log(targetID, movingID);
+    }
+}
+
 // Updates all binded lists
 // Second param is optional, this is why design wise it's after the object insertion
 myList.add({
