@@ -19,6 +19,7 @@ This is a new project directly started as open source, so it's a continuous work
 You can also contact me via veselin.krastanov.zero@gmail.com to discuss contribution.
 
 ## In case of bugs please use the issues section here, updates are very frequent and so are responses, thanks!
+## TypeScript version is also comming it's way here, stay tuned!
 
 ## What is done so far that is stable and ready to use?
 
