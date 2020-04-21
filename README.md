@@ -1,6 +1,3 @@
-Ground Zero is now Grafix
-Moved here -> https://github.com/krastanov-veselin/grafix
-
 ## Welcome to Ground Zero
 ![alt text](./github_images/name_cover.jpg)
 
